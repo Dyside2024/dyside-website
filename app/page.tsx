@@ -215,7 +215,7 @@ useEffect(() => {
   <div className="max-w-4xl mx-auto">
 
     <img
-      src="/band-photo-web.png"
+      src="/band-photo-web.jpg"
       alt="DYSIDE"
       className="w-full rounded-xl shadow-2xl mb-12"
     />
