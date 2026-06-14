@@ -15,8 +15,9 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
-  title: "DYSIDE",
-  description: "French Modern Metalcore Band",
+  title: "DYSIDE | Official Website",
+  description:
+  "Metalcore from Paris. New EP coming soon.",
 
   openGraph: {
     title: "DYSIDE",
