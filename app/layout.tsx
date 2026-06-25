@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   "Metalcore from Paris. New EP coming soon.",
 
   openGraph: {
-    title: "DYSIDE",
-    description: "French Modern Metalcore Band",
+    title: "DYSIDE | Official Website",
+    description: "Metalcore from Paris. New EP coming soon.",
     url: "https://dyside.fr",
     siteName: "DYSIDE",
     images: [

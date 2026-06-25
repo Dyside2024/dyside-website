@@ -26,14 +26,16 @@ export default function Home() {
 ];
 
 const [selectedImage, setSelectedImage] = useState<number | null>(null);
+const [showVideo, setShowVideo] = useState(false);
 const [visibleSections, setVisibleSections] = useState<string[]>([]);
 useEffect(() => {
   const handleKeyDown = (event: KeyboardEvent) => {
     if (selectedImage === null) return;
 
     if (event.key === "Escape") {
-      setSelectedImage(null);
-    }
+  setSelectedImage(null);
+  setShowVideo(false);
+}
 
     if (event.key === "ArrowLeft") {
       setSelectedImage(
@@ -91,6 +93,10 @@ useEffect(() => {
 
    <a href="#release">
   RELEASE
+</a>
+
+<a href="#live" className="hover:text-gray-400 transition">
+  LIVE
 </a>
 
     <a href="#gallery" className="hover:text-gray-400 transition">
@@ -328,6 +334,50 @@ useEffect(() => {
 
 </section>
 
+{/* LIVE PERFORMANCE */}
+<section
+  id="live"
+  className="max-w-6xl mx-auto px-10 py-24"
+>
+
+  <h2 className="text-3xl text-center tracking-[0.3em] mb-16">
+    LIVE PERFORMANCE
+  </h2>
+
+  <div
+    onClick={() => setShowVideo(true)}
+    className="relative max-w-5xl mx-auto cursor-pointer overflow-hidden rounded-2xl group shadow-2xl"
+  >
+
+    {/* Miniature */}
+    <img
+      src="https://img.youtube.com/vi/psDewmjkPwA/maxresdefault.jpg"
+      alt="DYSIDE Live"
+      className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75"
+    />
+
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition duration-500"></div>
+
+    {/* Bouton Play */}
+    <div className="absolute inset-0 flex items-center justify-center">
+
+      <div className="w-24 h-24 rounded-full border-2 border-white flex items-center justify-center backdrop-blur-md bg-white/10 group-hover:scale-110 transition duration-300">
+
+        <span className="text-5xl ml-2">▶</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <p className="text-center text-gray-400 mt-8 text-lg">
+    Experience the intensity of DYSIDE live on stage.
+  </p>
+
+</section>
+
       {/* GALLERY */}
 <section id="gallery" className="max-w-7xl mx-auto px-10 py-24">
 
@@ -459,6 +509,34 @@ useEffect(() => {
     {/* Compteur */}
     <div className="absolute bottom-8 text-gray-300 tracking-widest">
       {selectedImage + 1} / {photos.length}
+    </div>
+
+  </div>
+)}
+{showVideo && (
+  <div
+    className="fixed inset-0 bg-black/95 z-[99999] flex items-center justify-center p-6"
+    onClick={() => setShowVideo(false)}
+  >
+
+    <button
+      onClick={() => setShowVideo(false)}
+      className="absolute top-6 right-8 text-white text-5xl hover:text-gray-400"
+    >
+      ×
+    </button>
+
+    <div
+      className="w-full max-w-6xl aspect-video"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <iframe
+        className="w-full h-full rounded-xl"
+        src="https://www.youtube.com/embed/psDewmjkPwA?autoplay=1"
+        title="DYSIDE Live"
+        allow="autoplay; encrypted-media"
+        allowFullScreen
+      />
     </div>
 
   </div>
