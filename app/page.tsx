@@ -233,7 +233,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <p className="text-center text-gray-400 mt-8 text-lg">Experience the intensity of DYSIDE live on stage.</p>
+        
       </section>
 
       {/* GALLERY */}
