@@ -193,7 +193,7 @@ export default function Home() {
       </section>
 
       {/* SHOWS */}
-      <section id="shows" className="max-w-6xl mx-auto px-10 py-24 min-h-[400px]">
+      <section id="shows" className="max-w-6xl mx-auto px-10 py-22 min-h-[400px]">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">SHOWS</h2>
         
         {/* Le conteneur Bandsintown (sans la balise script ici, elle est gérée en haut) */}
@@ -222,7 +222,7 @@ export default function Home() {
       </section>
 
       {/* LIVE PERFORMANCE */}
-      <section id="live" className="max-w-6xl mx-auto px-10 py-24">
+      <section id="live" className="max-w-6xl mx-auto px-10 py-22">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LIVE PERFORMANCE</h2>
         <div onClick={() => setShowVideo(true)} className="relative max-w-5xl mx-auto cursor-pointer overflow-hidden rounded-2xl group shadow-2xl">
           <img src="https://img.youtube.com/vi/psDewmjkPwA/maxresdefault.jpg" alt="DYSIDE Live" className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75" />
@@ -237,7 +237,7 @@ export default function Home() {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="max-w-7xl mx-auto px-10 py-24">
+      <section id="gallery" className="max-w-7xl mx-auto px-10 py-22">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">GALLERY</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((photo, index) => (
