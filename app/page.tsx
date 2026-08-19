@@ -132,7 +132,7 @@ export default function Home() {
             <p className="text-gray-400 mt-4">New music currently in production.</p>
           </div>
 
-          <div className="flex justify-center gap-12 mt-32 text-4xl">
+          <div className="flex justify-center gap-12 mt-16 text-4xl">
             <a
               href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd"
               target="_blank"
@@ -212,9 +212,9 @@ export default function Home() {
       {/* SHOWS */}
       <section id="shows" className="max-w-6xl mx-auto px-10 py-18 min-h-[400px]">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">SHOWS</h2>
-
+        
         {/* Le conteneur Bandsintown (sans la balise script ici, elle est gérée en haut) */}
-        <a
+        <a 
           className="bit-widget-initializer"
           data-artist-name="id_15632521"
           data-app-id="f6f92462c1c3f21c0f6561e2b5366bfa"
@@ -250,7 +250,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-
+        
       </section>
 
       {/* GALLERY */}
