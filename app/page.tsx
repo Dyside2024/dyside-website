@@ -93,7 +93,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white">
       <nav className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto flex justify-center gap-8 py-4 text-sm tracking-widest">
+        <div className="max-w-6xl mx-auto flex justify-center flex-wrap gap-4 md:gap-8 py-4 px-4 text-xs md:text-sm tracking-widest">
           <a href="#bio" className="hover:text-gray-400 transition">BIO</a>
           <a href="#release" className="hover:text-gray-400 transition">RELEASE</a>
           <a href="#shows" className="hover:text-gray-400 transition">SHOWS</a>
@@ -102,6 +102,7 @@ export default function Home() {
           <a href="#contact" className="hover:text-gray-400 transition">CONTACT</a>
         </div>
       </nav>
+
 
       {/* HERO */}
       <section className="h-screen relative flex flex-col justify-center items-center text-center p-10 pt-38 overflow-hidden">
