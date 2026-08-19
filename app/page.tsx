@@ -29,10 +29,8 @@ export default function Home() {
   const [showVideo, setShowVideo] = useState(false);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
   
-  // NOUVEAU : On crée une mémoire pour enregistrer le défilement de la page
   const [scrollY, setScrollY] = useState(0);
 
-  // NOUVEAU : On écoute la position de la souris quand on "scrolle"
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -41,72 +39,56 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 1. GESTION DU CLAVIER POUR LA GALERIE
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (selectedImage === null) return;
-
       if (event.key === "Escape") {
         setSelectedImage(null);
         setShowVideo(false);
       }
-
       if (event.key === "ArrowLeft") {
-        setSelectedImage(
-          selectedImage === 0 ? photos.length - 1 : selectedImage - 1
-        );
+        setSelectedImage(selectedImage === 0 ? photos.length - 1 : selectedImage - 1);
       }
-
       if (event.key === "ArrowRight") {
-        setSelectedImage(
-          selectedImage === photos.length - 1 ? 0 : selectedImage + 1
-        );
+        setSelectedImage(selectedImage === photos.length - 1 ? 0 : selectedImage + 1);
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage]);
 
-  // 2. GESTION DE L'APPARITION DES SECTIONS
   useEffect(() => {
     const sections = document.querySelectorAll(".fade-section");
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisibleSections((prev) => [
-              ...new Set([...prev, entry.target.id]),
-            ]);
+            setVisibleSections((prev) => [...new Set([...prev, entry.target.id])]);
           }
         });
       },
       { threshold: 0.15 }
     );
-
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
-  // 3. CHARGEMENT FORCÉ DU SCRIPT BANDSINTOWN
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgetv3.bandsintown.com/main.min.js";
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white">
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white relative">
       
-      {/* MENU (Version corrigée pour Mobile) */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10">
+      {/* MENU - Passé en z-[60] pour rester toujours au-dessus de tout */}
+      <nav className="fixed top-0 left-0 w-full z-[60] bg-black/40 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-6xl mx-auto flex justify-center flex-wrap gap-4 md:gap-8 py-4 px-4 text-xs md:text-sm tracking-widest">
           <a href="#bio" className="hover:text-gray-400 transition">BIO</a>
           <a href="#release" className="hover:text-gray-400 transition">RELEASE</a>
@@ -117,12 +99,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION AVEC ANIMATION PARALLAX */}
+      {/* HERO SECTION */}
       <section className="h-screen relative flex flex-col justify-center items-center text-center p-10 pt-38 overflow-hidden">
         
-        {/* IMAGE DE FOND ANIMÉE */}
+        {/* IMAGE DE FOND (Descend doucement) */}
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
             transform: `translateY(${scrollY * 0.4}px)`,
             opacity: Math.max(1 - scrollY / 700, 0),
@@ -136,52 +118,73 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/70"></div>
         </div>
 
-        {/* LOGO ET TEXTE ANIMÉS */}
-        <div 
-          className="relative z-10 flex flex-col items-center"
-          style={{
-            transform: `translateY(${scrollY * 0.2}px)`,
-            opacity: Math.max(1 - scrollY / 350, 0),
-          }}
-        >
-          <div className="relative mb-10 flex justify-center items-center">
-            <div className="absolute w-[500px] h-[500px] bg-white/20 blur-[120px] rounded-full opacity-70"></div>
-            <img
-              src="/logo-dyside.png"
-              alt="DYSIDE logo"
-              className="w-[450px] md:w-[550px] opacity-0 animate-[fadeIn_1.2s_ease-out_forwards]"
-              style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.8))" }}
-            />
+        {/* CONTENU CENTRAL */}
+        <div className="relative z-10 flex flex-col items-center w-full mt-10">
+          
+          {/* LOGO ET TEXTE (S'effacent et descendent) */}
+          <div 
+            className="flex flex-col items-center pointer-events-none"
+            style={{
+              transform: `translateY(${scrollY * 0.2}px)`,
+              opacity: Math.max(1 - scrollY / 300, 0),
+            }}
+          >
+            <div className="relative mb-10 flex justify-center items-center">
+              <div className="absolute w-[500px] h-[500px] bg-white/20 blur-[120px] rounded-full opacity-70"></div>
+              <img
+                src="/logo-dyside.png"
+                alt="DYSIDE logo"
+                className="w-[450px] md:w-[550px] opacity-0 animate-[fadeIn_1.2s_ease-out_forwards]"
+                style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.8))" }}
+              />
+            </div>
+
+            <p className="text-gray-300 max-w-xl">Metalcore — France</p>
+
+            <div className="mt-12 text-center">
+              <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">NEXT RELEASE</p>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-wide">EP COMING SOON</h2>
+              <p className="text-gray-400 mt-4">New music currently in production.</p>
+            </div>
           </div>
 
-          <p className="text-gray-300 max-w-xl">Metalcore — France</p>
-
-          <div className="mt-12 text-center">
-            <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">NEXT RELEASE</p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-wide">EP COMING SOON</h2>
-            <p className="text-gray-400 mt-4">New music currently in production.</p>
+          {/* ICÔNES SOCIALES DYNAMIQUES (Le fameux Dock) */}
+          <div className="relative z-50 mt-8 h-[60px] w-full">
+            <div
+              className={`flex justify-center w-full transition-all duration-700 ${
+                scrollY > 300
+                  ? "fixed top-24 md:top-28 left-0 z-50 scale-[0.85]"
+                  : "relative scale-100"
+              }`}
+            >
+              <div
+                className={`flex justify-center items-center gap-10 md:gap-12 text-4xl transition-all duration-700 ${
+                  scrollY > 300
+                    ? "bg-black/70 backdrop-blur-xl px-10 py-4 rounded-full border border-white/10 shadow-2xl"
+                    : ""
+                }`}
+              >
+                <a href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd" target="_blank" className="hover:scale-125 transition duration-300">
+                  <FaSpotify className="text-green-500" />
+                </a>
+                <a href="https://music.apple.com/fr/artist/dyside/1477744614" target="_blank" className="hover:scale-125 transition duration-300">
+                  <FaApple />
+                </a>
+                <a href="https://www.youtube.com/channel/UCo-xK9prFp1Kb8CWHUDURLQ" target="_blank" className="hover:scale-125 transition duration-300">
+                  <FaYoutube className="text-red-600" />
+                </a>
+                <a href="https://www.instagram.com/dyside.fr" target="_blank" className="hover:scale-125 transition duration-300">
+                  <FaInstagram className="text-purple-400" />
+                </a>
+              </div>
+            </div>
           </div>
 
-          {/* ICÔNES RESCENTREÉS AVEC mt-20 */}
-          <div className="flex justify-center gap-12 mt-20 text-4xl">
-            <a href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd" target="_blank" className="hover:scale-125 transition duration-300">
-              <FaSpotify className="text-green-500" />
-            </a>
-            <a href="https://music.apple.com/fr/artist/dyside/1477744614" target="_blank" className="hover:scale-125 transition duration-300">
-              <FaApple />
-            </a>
-            <a href="https://www.youtube.com/channel/UCo-xK9prFp1Kb8CWHUDURLQ" target="_blank" className="hover:scale-125 transition duration-300">
-              <FaYoutube className="text-red-600" />
-            </a>
-            <a href="https://www.instagram.com/dyside.fr" target="_blank" className="hover:scale-125 transition duration-300">
-              <FaInstagram className="text-purple-400" />
-            </a>
-          </div>
         </div>
       </section>
 
       {/* BIO */}
-      <section id="bio" className="max-w-6xl mx-auto px-10 py-24">
+      <section id="bio" className="max-w-6xl mx-auto px-10 py-24 relative z-20 bg-transparent">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">BIO</h2>
         <div className="max-w-4xl mx-auto">
           <img src="/band-photo-web.jpg" alt="DYSIDE" className="w-full rounded-xl shadow-2xl mb-12" />
@@ -204,7 +207,7 @@ export default function Home() {
       </section>
 
       {/* LATEST RELEASE */}
-      <section id="release" className="max-w-6xl mx-auto px-10 pt-8 pb-24">
+      <section id="release" className="max-w-6xl mx-auto px-10 pt-8 pb-24 relative z-20">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LATEST RELEASE</h2>
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <img src="/primitive-modernity.jpg" alt="Primitive Modernity" className="rounded-xl" />
@@ -224,7 +227,7 @@ export default function Home() {
       </section>
 
       {/* SHOWS */}
-      <section id="shows" className="max-w-6xl mx-auto px-10 py-24 min-h-[400px]">
+      <section id="shows" className="max-w-6xl mx-auto px-10 py-24 min-h-[400px] relative z-20">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">SHOWS</h2>
         <a 
           className="bit-widget-initializer"
@@ -251,7 +254,7 @@ export default function Home() {
       </section>
 
       {/* LIVE PERFORMANCE */}
-      <section id="live" className="max-w-6xl mx-auto px-10 py-24">
+      <section id="live" className="max-w-6xl mx-auto px-10 py-24 relative z-20">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LIVE PERFORMANCE</h2>
         <div onClick={() => setShowVideo(true)} className="relative max-w-5xl mx-auto cursor-pointer overflow-hidden rounded-2xl group shadow-2xl">
           <img src="https://img.youtube.com/vi/psDewmjkPwA/maxresdefault.jpg" alt="DYSIDE Live" className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75" />
@@ -266,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="max-w-7xl mx-auto px-10 py-24">
+      <section id="gallery" className="max-w-7xl mx-auto px-10 py-24 relative z-20">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">GALLERY</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((photo, index) => (
@@ -283,10 +286,11 @@ export default function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="max-w-4xl mx-auto px-10 py-24 text-center">
+      <section id="contact" className="max-w-4xl mx-auto px-10 py-24 text-center relative z-20">
         <h2 className="text-3xl tracking-[0.3em] mb-16">CONTACT</h2>
         <p className="text-gray-500 tracking-[0.3em] mb-4">BOOKING & MANAGEMENT</p>
         <a href="mailto:contact@dyside.fr" className="text-2xl hover:text-gray-400 transition">contact@dyside.fr</a>
+        {/* On peut garder ces icônes de bas de page fixes, c'est classique pour un footer */}
         <div className="flex justify-center gap-10 mt-12 text-4xl">
           <a href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd" target="_blank" className="hover:scale-125 transition duration-300"><FaSpotify className="text-green-500" /></a>
           <a href="https://music.apple.com/fr/artist/dyside/1477744614" target="_blank" className="hover:scale-125 transition duration-300"><FaApple /></a>
