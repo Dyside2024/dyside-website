@@ -132,7 +132,7 @@ export default function Home() {
             <p className="text-gray-400 mt-4">New music currently in production.</p>
           </div>
 
-          <div className="flex justify-center gap-12 mt-16 text-4xl">
+          <div className="flex justify-center gap-12 mt-10 text-4xl">
             <a
               href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd"
               target="_blank"
