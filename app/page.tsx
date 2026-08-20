@@ -28,113 +28,93 @@ export default function Home() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [showVideo, setShowVideo] = useState(false);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
-  
-  // On garde juste la mémoire du défilement pour les logos
-  const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  // 1. GESTION DU CLAVIER POUR LA GALERIE
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (selectedImage === null) return;
+
       if (event.key === "Escape") {
         setSelectedImage(null);
         setShowVideo(false);
       }
+
       if (event.key === "ArrowLeft") {
-        setSelectedImage(selectedImage === 0 ? photos.length - 1 : selectedImage - 1);
+        setSelectedImage(
+          selectedImage === 0 ? photos.length - 1 : selectedImage - 1
+        );
       }
+
       if (event.key === "ArrowRight") {
-        setSelectedImage(selectedImage === photos.length - 1 ? 0 : selectedImage + 1);
+        setSelectedImage(
+          selectedImage === photos.length - 1 ? 0 : selectedImage + 1
+        );
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage]);
 
+  // 2. GESTION DE L'APPARITION DES SECTIONS
   useEffect(() => {
     const sections = document.querySelectorAll(".fade-section");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisibleSections((prev) => [...new Set([...prev, entry.target.id])]);
+            setVisibleSections((prev) => [
+              ...new Set([...prev, entry.target.id]),
+            ]);
           }
         });
       },
       { threshold: 0.15 }
     );
+
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
+  // 3. CHARGEMENT FORCÉ DU SCRIPT BANDSINTOWN (La solution au problème !)
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgetv3.bandsintown.com/main.min.js";
     script.charset = "utf-8";
     script.async = true;
     document.body.appendChild(script);
+
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white relative">
-      
-      {/* LE BLOC MENU COMPLET (Liens + Logos bloqués en dessous) */}
-      <div className="fixed top-0 left-0 w-full z-[9999] flex flex-col">
-        {/* 1. Le menu principal classique */}
-        <nav className="w-full bg-black/40 backdrop-blur-xl border-b border-white/10">
-          <div className="max-w-6xl mx-auto flex justify-center flex-wrap gap-4 md:gap-8 py-4 px-4 text-xs md:text-sm tracking-widest">
-            <a href="#bio" className="hover:text-gray-400 transition">BIO</a>
-            <a href="#release" className="hover:text-gray-400 transition">RELEASE</a>
-            <a href="#shows" className="hover:text-gray-400 transition">SHOWS</a>
-            <a href="#live" className="hover:text-gray-400 transition">LIVE</a>
-            <a href="#gallery" className="hover:text-gray-400 transition">GALLERY</a>
-            <a href="#contact" className="hover:text-gray-400 transition">CONTACT</a>
-          </div>
-        </nav>
-
-        {/* 2. La barre de logos qui apparaît doucement en descendant */}
-        <div 
-          className={`w-full bg-black/60 backdrop-blur-md border-b border-white/5 flex justify-center items-center gap-10 overflow-hidden transition-all duration-500 ${
-            scrollY > 400 ? "h-12 opacity-100" : "h-0 opacity-0 border-transparent"
-          }`}
-        >
-          <a href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd" target="_blank" className="text-2xl hover:scale-125 transition duration-300">
-            <FaSpotify className="text-green-500" />
-          </a>
-          <a href="https://music.apple.com/fr/artist/dyside/1477744614" target="_blank" className="text-2xl hover:scale-125 transition duration-300">
-            <FaApple />
-          </a>
-          <a href="https://www.youtube.com/channel/UCo-xK9prFp1Kb8CWHUDURLQ" target="_blank" className="text-2xl hover:scale-125 transition duration-300">
-            <FaYoutube className="text-red-600" />
-          </a>
-          <a href="https://www.instagram.com/dyside.fr" target="_blank" className="text-2xl hover:scale-125 transition duration-300">
-            <FaInstagram className="text-purple-400" />
-          </a>
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-6xl mx-auto flex justify-center flex-wrap gap-4 md:gap-8 py-4 px-4 text-xs md:text-sm tracking-widest">
+          <a href="#bio" className="hover:text-gray-400 transition">BIO</a>
+          <a href="#release" className="hover:text-gray-400 transition">RELEASE</a>
+          <a href="#shows" className="hover:text-gray-400 transition">SHOWS</a>
+          <a href="#live" className="hover:text-gray-400 transition">LIVE</a>
+          <a href="#gallery" className="hover:text-gray-400 transition">GALLERY</a>
+          <a href="#contact" className="hover:text-gray-400 transition">CONTACT</a>
         </div>
-      </div>
+      </nav>
 
-      {/* HERO SECTION V1 CLASSIC (Sans effet de disparition) */}
+
+      {/* HERO */}
       <section className="h-screen relative flex flex-col justify-center items-center text-center p-10 pt-38 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src="/bg-dyside.jpg"
             className="w-full h-full object-cover object-top scale-105"
-            alt="Dyside Background"
           />
           <div className="absolute inset-0 bg-black/70"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center mt-12">
+        <div className="relative z-10 flex flex-col items-center">
           <div className="relative mb-10 flex justify-center items-center">
             <div className="absolute w-[500px] h-[500px] bg-white/20 blur-[120px] rounded-full opacity-70"></div>
             <img
@@ -153,21 +133,37 @@ export default function Home() {
             <p className="text-gray-400 mt-4">New music currently in production.</p>
           </div>
 
-          {/* GROS LOGOS D'ACCUEIL */}
-          <div className="flex justify-center gap-12 mt-20 text-4xl">
-            <a href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd" target="_blank" className="hover:scale-125 transition duration-300">
+          <div className="flex justify-center gap-12 mt-4 text-4xl">
+            <a
+              href="https://open.spotify.com/intl-fr/artist/3mbNYk5Z25DP7vObLm9GCd"
+              target="_blank"
+              className="hover:scale-125 transition duration-300"
+            >
               <FaSpotify className="text-green-500" />
             </a>
-            <a href="https://music.apple.com/fr/artist/dyside/1477744614" target="_blank" className="hover:scale-125 transition duration-300">
+            <a
+              href="https://music.apple.com/fr/artist/dyside/1477744614"
+              target="_blank"
+              className="hover:scale-125 transition duration-300"
+            >
               <FaApple />
             </a>
-            <a href="https://www.youtube.com/channel/UCo-xK9prFp1Kb8CWHUDURLQ" target="_blank" className="hover:scale-125 transition duration-300">
+            <a
+              href="https://www.youtube.com/channel/UCo-xK9prFp1Kb8CWHUDURLQ"
+              target="_blank"
+              className="hover:scale-125 transition duration-300"
+            >
               <FaYoutube className="text-red-600" />
             </a>
-            <a href="https://www.instagram.com/dyside.fr" target="_blank" className="hover:scale-125 transition duration-300">
+            <a
+              href="https://www.instagram.com/dyside.fr"
+              target="_blank"
+              className="hover:scale-125 transition duration-300"
+            >
               <FaInstagram className="text-purple-400" />
             </a>
           </div>
+
         </div>
       </section>
 
@@ -215,8 +211,10 @@ export default function Home() {
       </section>
 
       {/* SHOWS */}
-      <section id="shows" className="max-w-6xl mx-auto px-10 py-24 min-h-[400px]">
+      <section id="shows" className="max-w-6xl mx-auto px-10 py-18 min-h-[400px]">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">SHOWS</h2>
+        
+        {/* Le conteneur Bandsintown (sans la balise script ici, elle est gérée en haut) */}
         <a 
           className="bit-widget-initializer"
           data-artist-name="id_15632521"
@@ -242,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* LIVE PERFORMANCE */}
-      <section id="live" className="max-w-6xl mx-auto px-10 py-24">
+      <section id="live" className="max-w-6xl mx-auto px-10 py-18">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LIVE PERFORMANCE</h2>
         <div onClick={() => setShowVideo(true)} className="relative max-w-5xl mx-auto cursor-pointer overflow-hidden rounded-2xl group shadow-2xl">
           <img src="https://img.youtube.com/vi/psDewmjkPwA/maxresdefault.jpg" alt="DYSIDE Live" className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75" />
@@ -253,11 +251,11 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <p className="text-center text-gray-400 mt-8 text-lg">Experience the intensity of DYSIDE live on stage.</p>
+        
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="max-w-7xl mx-auto px-10 py-24">
+      <section id="gallery" className="max-w-7xl mx-auto px-10 py-18">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">GALLERY</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {photos.map((photo, index) => (
@@ -288,7 +286,7 @@ export default function Home() {
 
       {/* MODAL IMAGES */}
       {selectedImage !== null && (
-        <div className="fixed inset-0 bg-black/95 z-[99999] flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center">
           <button onClick={() => setSelectedImage(null)} className="absolute top-6 right-8 text-white text-5xl hover:text-gray-400 z-50">×</button>
           <button onClick={() => setSelectedImage(selectedImage === 0 ? photos.length - 1 : selectedImage - 1)} className="absolute left-6 text-white text-6xl hover:text-gray-400 z-50">‹</button>
           <img src={photos[selectedImage]} alt="" className="max-w-[90vw] max-h-[90vh] rounded-xl" />
@@ -309,3 +307,4 @@ export default function Home() {
     </main>
   );
 }
+
