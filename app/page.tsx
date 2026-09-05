@@ -77,7 +77,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 3. CHARGEMENT FORCÉ DU SCRIPT BANDSINTOWN (La solution au problème !)
+  // 3. CHARGEMENT FORCÉ DU SCRIPT BANDSINTOWN
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://widgetv3.bandsintown.com/main.min.js";
@@ -102,7 +102,6 @@ export default function Home() {
           <a href="#contact" className="hover:text-gray-400 transition">CONTACT</a>
         </div>
       </nav>
-
 
       {/* HERO */}
       <section className="h-screen relative flex flex-col justify-center items-center text-center p-10 pt-38 overflow-hidden">
@@ -163,7 +162,6 @@ export default function Home() {
               <FaInstagram className="text-purple-400" />
             </a>
           </div>
-
         </div>
       </section>
 
@@ -179,7 +177,7 @@ export default function Home() {
             À travers un chant habité et des compositions puissantes, Dyside explore des thématiques fortes et contemporaines, transformant la colère, la révolte et les tensions du monde moderne en une musique à la fois agressive, sincère et fédératrice.
           </p>
           <p className="text-lg text-gray-400 leading-relaxed mb-12">
-            Après la sortie de son dernier single <span className="text-white">Primitive Modernity</span>, le groupe prépare actuellement la sortie de son prochain EP et poursuit son évolution avec une ambition claire : proposer un metal authentique et percutant.
+            Après la sortie de son dernier single <span className="text-white">SWArM</span>, le groupe prépare actuellement la sortie de son prochain EP et poursuit son évolution avec une ambition claire : proposer un metal authentique et percutant.
           </p>
           <div className="grid md:grid-cols-2 gap-10 text-sm">
             <div><p className="text-gray-500 tracking-widest mb-2">GENRE</p><p>Metalcore</p></div>
@@ -194,14 +192,14 @@ export default function Home() {
       <section id="release" className="max-w-6xl mx-auto px-10 pt-8 pb-24">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LATEST RELEASE</h2>
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <img src="/primitive-modernity.jpg" alt="Primitive Modernity" className="rounded-xl" />
+          <img src="/latest-release.png" alt="SWArM" className="rounded-xl" />
           <div>
             <p className="text-gray-500 tracking-[0.3em] mb-3">NEW SINGLE</p>
-            <h3 className="text-5xl font-bold mb-6">Primitive Modernity</h3>
+            <h3 className="text-5xl font-bold mb-6">SWArM</h3>
             <p className="text-gray-400 mb-8">The latest single from DYSIDE.</p>
             <iframe
               style={{ borderRadius: "12px" }}
-              src="https://open.spotify.com/embed/track/0DAt0FeTQOrA2uYIQ3uVrs"
+              src="https://open.spotify.com/embed/track/6cMIlZEktEatH4CMMwtIG8"
               width="100%"
               height="152"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -214,7 +212,6 @@ export default function Home() {
       <section id="shows" className="max-w-6xl mx-auto px-10 py-18 min-h-[400px]">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">SHOWS</h2>
         
-        {/* Le conteneur Bandsintown (sans la balise script ici, elle est gérée en haut) */}
         <a 
           className="bit-widget-initializer"
           data-artist-name="id_15632521"
@@ -251,7 +248,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
       </section>
 
       {/* GALLERY */}
@@ -307,4 +303,3 @@ export default function Home() {
     </main>
   );
 }
-
