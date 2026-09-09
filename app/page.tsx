@@ -240,7 +240,7 @@ export default function Home() {
       <section id="live" className="max-w-6xl mx-auto px-10 py-18">
         <h2 className="text-3xl text-center tracking-[0.3em] mb-16">LIVE PERFORMANCE</h2>
         <div onClick={() => setShowVideo(true)} className="relative max-w-5xl mx-auto cursor-pointer overflow-hidden rounded-2xl group shadow-2xl">
-          <img src="https://img.youtube.com/vi/psDewmjkPwA/maxresdefault.jpg" alt="DYSIDE Live" className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75" />
+          <img src="https://img.youtube.com/vi/psDewmjkPwA/hqdefault.jpg" alt="DYSIDE Live" className="w-full transition duration-700 group-hover:scale-105 group-hover:brightness-75" />
           <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition duration-500"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-24 h-24 rounded-full border-2 border-white flex items-center justify-center backdrop-blur-md bg-white/10 group-hover:scale-110 transition duration-300">
