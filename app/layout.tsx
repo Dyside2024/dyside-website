@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "DYSIDE | Official Website";
-const description = "Metalcore from Paris. New EP coming soon.";
+const title = "DYSIDE | Site officiel";
+const description = "Metalcore de Paris. Nouvel EP bientôt disponible.";
 
 export const metadata: Metadata = {
   // Nécessaire pour que les images Open Graph aient une URL absolue

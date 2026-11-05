@@ -30,18 +30,18 @@ const photos = [
 
 const navLinks = [
   { href: "#bio", label: "BIO" },
-  { href: "#release", label: "RELEASE" },
-  { href: "#shows", label: "SHOWS" },
-  { href: "#live", label: "LIVE" },
-  { href: "#gallery", label: "GALLERY" },
+  { href: "#sortie", label: "SORTIE" },
+  { href: "#concerts", label: "CONCERTS" },
+  { href: "#scene", label: "SCÈNE" },
+  { href: "#galerie", label: "GALERIE" },
   { href: "#contact", label: "CONTACT" },
 ];
 
 const facts = [
   { label: "GENRE", value: "Metalcore" },
-  { label: "LOCATION", value: "Paris, France" },
-  { label: "FOR FANS OF", value: "Architects, Currents, Polaris" },
-  { label: "STATUS", value: "EP Coming Soon" },
+  { label: "ORIGINE", value: "Paris, France" },
+  { label: "POUR LES FANS DE", value: "Architects, Currents, Polaris" },
+  { label: "ACTUALITÉ", value: "Nouvel EP en préparation" },
 ];
 
 const sectionTitle = "text-3xl text-center tracking-[0.3em] mb-16";
@@ -99,9 +99,9 @@ export default function Home() {
           <p className="text-gray-300 max-w-xl">Metalcore — France</p>
 
           <div className="mt-12 text-center">
-            <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">NEXT RELEASE</p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-wide">EP COMING SOON</h2>
-            <p className="text-gray-400 mt-4">New music currently in production.</p>
+            <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">PROCHAINE SORTIE</p>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-wide">NOUVEL EP BIENTÔT</h2>
+            <p className="text-gray-400 mt-4">Nouveaux morceaux en cours de production.</p>
           </div>
 
           <SocialLinks className="gap-12 mt-4" />
@@ -139,9 +139,9 @@ export default function Home() {
         </div>
       </FadeSection>
 
-      {/* LATEST RELEASE */}
-      <FadeSection id="release" className="max-w-6xl mx-auto px-6 md:px-10 pt-8 pb-24">
-        <h2 className={sectionTitle}>LATEST RELEASE</h2>
+      {/* DERNIÈRE SORTIE */}
+      <FadeSection id="sortie" className="max-w-6xl mx-auto px-6 md:px-10 pt-8 pb-24">
+        <h2 className={sectionTitle}>DERNIÈRE SORTIE</h2>
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <Image
             src={latestRelease}
@@ -151,9 +151,9 @@ export default function Home() {
             className="w-full h-auto rounded-xl"
           />
           <div>
-            <p className="text-gray-500 tracking-[0.3em] mb-3">NEW SINGLE</p>
+            <p className="text-gray-500 tracking-[0.3em] mb-3">NOUVEAU SINGLE</p>
             <h3 className="text-5xl font-bold mb-6">SWArM</h3>
-            <p className="text-gray-400 mb-8">The latest single from DYSIDE.</p>
+            <p className="text-gray-400 mb-8">Le dernier single de DYSIDE.</p>
             <iframe
               title="Écouter SWArM sur Spotify"
               style={{ borderRadius: "12px" }}
@@ -167,9 +167,9 @@ export default function Home() {
         </div>
       </FadeSection>
 
-      {/* SHOWS */}
-      <FadeSection id="shows" className="max-w-6xl mx-auto px-6 md:px-10 py-18 min-h-[400px]">
-        <h2 className={sectionTitle}>SHOWS</h2>
+      {/* CONCERTS */}
+      <FadeSection id="concerts" className="max-w-6xl mx-auto px-6 md:px-10 py-18 min-h-[400px]">
+        <h2 className={sectionTitle}>CONCERTS</h2>
         <a
           className="bit-widget-initializer"
           data-artist-name="id_15632521"
@@ -184,7 +184,7 @@ export default function Home() {
           data-date-border-width="0px"
           data-follow-section-position="hidden"
           data-follow-section-alignment="center"
-          data-follow-section-cta-text="FOLLOW"
+          data-follow-section-cta-text="SUIVRE"
           data-event-rsvp-position="left"
           data-event-rsvp-cta-size="small"
           data-follow-section-cta-icon="true"
@@ -196,22 +196,22 @@ export default function Home() {
         <Script src="https://widgetv3.bandsintown.com/main.min.js" strategy="lazyOnload" />
       </FadeSection>
 
-      {/* LIVE PERFORMANCE */}
-      <FadeSection id="live" className="max-w-6xl mx-auto px-6 md:px-10 py-18">
-        <h2 className={sectionTitle}>LIVE PERFORMANCE</h2>
-        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE Live" />
+      {/* SUR SCÈNE */}
+      <FadeSection id="scene" className="max-w-6xl mx-auto px-6 md:px-10 py-18">
+        <h2 className={sectionTitle}>SUR SCÈNE</h2>
+        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE sur scène" />
       </FadeSection>
 
-      {/* GALLERY */}
-      <FadeSection id="gallery" className="max-w-7xl mx-auto px-6 md:px-10 py-18">
-        <h2 className={sectionTitle}>GALLERY</h2>
+      {/* GALERIE */}
+      <FadeSection id="galerie" className="max-w-7xl mx-auto px-6 md:px-10 py-18">
+        <h2 className={sectionTitle}>GALERIE</h2>
         <Gallery photos={photos} />
       </FadeSection>
 
       {/* CONTACT */}
       <FadeSection id="contact" className="max-w-4xl mx-auto px-6 md:px-10 py-24 text-center">
         <h2 className="text-3xl tracking-[0.3em] mb-16">CONTACT</h2>
-        <p className="text-gray-500 tracking-[0.3em] mb-4">BOOKING &amp; MANAGEMENT</p>
+        <p className="text-gray-500 tracking-[0.3em] mb-4">RÉSERVATIONS &amp; MANAGEMENT</p>
         <a href="mailto:contact@dyside.fr" className="text-xl md:text-2xl hover:text-gray-400 transition">
           contact@dyside.fr
         </a>
