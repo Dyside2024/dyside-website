@@ -34,7 +34,9 @@ body {
 
 .fade-section.visible {
   opacity: 1;
-  transform: translateY(0);
+  /* « none » et non translateY(0) : un transform, même nul, casse le
+     position: fixed des éléments enfants (fenêtres photo / vidéo) */
+  transform: none;
 }
 
 /* Respecte le réglage « réduire les animations » du système */

@@ -2,6 +2,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import { useCallback, useState } from "react";
+import { createPortal } from "react-dom";
 import { useModal } from "./useModal";
 
 export function LiveVideo({
@@ -45,34 +46,36 @@ export function LiveVideo({
         </span>
       </button>
 
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={title}
-          onClick={close}
-          className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center p-6"
-        >
-          <button
-            ref={closeButtonRef}
-            type="button"
+      {open &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={title}
             onClick={close}
-            aria-label="Fermer la vidéo"
-            className="absolute top-6 right-8 text-white text-5xl hover:text-gray-400"
+            className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center p-6"
           >
-            ×
-          </button>
-          <div className="w-full max-w-6xl aspect-video" onClick={(e) => e.stopPropagation()}>
-            <iframe
-              className="w-full h-full rounded-xl"
-              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`}
-              title={title}
-              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-              allowFullScreen
-            />
-          </div>
-        </div>
-      )}
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={close}
+              aria-label="Fermer la vidéo"
+              className="absolute top-6 right-8 text-white text-5xl hover:text-gray-400"
+            >
+              ×
+            </button>
+            <div className="w-full max-w-6xl aspect-video" onClick={(e) => e.stopPropagation()}>
+              <iframe
+                className="w-full h-full rounded-xl"
+                src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`}
+                title={title}
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+              />
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   );
 }
