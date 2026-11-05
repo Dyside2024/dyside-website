@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DYSIDE — Site officiel
 
-## Getting Started
+Site vitrine / EPK du groupe de metalcore DYSIDE ([dyside.fr](https://dyside.fr)), réalisé avec Next.js 16, React 19 et Tailwind CSS 4.
 
-First, run the development server:
+## Lancer le site en local
+
+Prérequis : [Node.js](https://nodejs.org) (version LTS).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install     # une seule fois, installe les dépendances
+npm run dev     # lance le site sur http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Autres commandes :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `npm run build` : compile la version de production
+- `npm run lint` : vérifie le code
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Organisation
 
-## Learn More
+- `app/page.tsx` : la page d'accueil (toutes les sections)
+- `app/layout.tsx` : titre, description, image de partage (Open Graph)
+- `app/_components/` : galerie photo, vidéo live, liens réseaux, animation d'apparition
+- `public/` : images
 
-To learn more about Next.js, take a look at the following resources:
+## Ajouter une photo à la galerie
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Déposer le fichier dans `public/` (ex. `photo13.jpg`).
+2. Dans `app/page.tsx`, ajouter `import photo13 from "@/public/photo13.jpg";` et l'ajouter au tableau `photos`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Next.js redimensionne et compresse automatiquement les images (`next/image`) : pas besoin de les optimiser à la main, même si des fichiers d'origine plus légers (≈ 2000 px de large) accélèrent la compilation.

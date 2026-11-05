@@ -12,27 +12,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
+const title = "DYSIDE | Official Website";
+const description = "Metalcore from Paris. New EP coming soon.";
 
 export const metadata: Metadata = {
-  title: "DYSIDE | Official Website",
-  description:
-  "Metalcore from Paris. New EP coming soon.",
-
+  // Nécessaire pour que les images Open Graph aient une URL absolue
+  metadataBase: new URL("https://dyside.fr"),
+  title,
+  description,
   openGraph: {
-    title: "DYSIDE | Official Website",
-    description: "Metalcore from Paris. New EP coming soon.",
-    url: "https://dyside.fr",
+    title,
+    description,
+    url: "/",
     siteName: "DYSIDE",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_US",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "DYSIDE" }],
+    locale: "fr_FR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -43,10 +44,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }
