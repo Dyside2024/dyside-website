@@ -37,13 +37,6 @@ const navLinks = [
   { href: "#contact", label: "CONTACT" },
 ];
 
-const facts = [
-  { label: "GENRE", value: "Metalcore" },
-  { label: "ORIGINE", value: "Paris, France" },
-  { label: "POUR LES FANS DE", value: "Architects, Currents, Polaris" },
-  { label: "ACTUALITÉ", value: "Nouvel EP en préparation" },
-];
-
 const sectionTitle = "text-3xl text-center tracking-[0.3em] mb-16";
 
 export default function Home() {
@@ -101,10 +94,9 @@ export default function Home() {
           <div className="mt-12 text-center">
             <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">PROCHAINE SORTIE</p>
             <h2 className="text-3xl md:text-5xl font-bold tracking-wide">NOUVEL EP BIENTÔT</h2>
-            <p className="text-gray-400 mt-4">Nouveaux morceaux en cours de production.</p>
           </div>
 
-          <SocialLinks className="gap-12 mt-4" />
+          <SocialLinks className="gap-12 mt-8" />
         </div>
       </section>
 
@@ -119,23 +111,25 @@ export default function Home() {
             sizes="(min-width: 896px) 896px, 100vw"
             className="w-full h-auto rounded-xl shadow-2xl mb-12"
           />
-          <p className="text-lg text-gray-300 leading-relaxed mb-8">
-            Dyside est un groupe de metalcore originaire de Paris. Porté par une énergie brute et une intensité sans compromis, le groupe forge son identité à travers un mélange de riffs incisifs, de rythmiques percutantes et d&apos;émotions à vif.
-          </p>
-          <p className="text-lg text-gray-400 leading-relaxed mb-8">
-            À travers un chant habité et des compositions puissantes, Dyside explore des thématiques fortes et contemporaines, transformant la colère, la révolte et les tensions du monde moderne en une musique à la fois agressive, sincère et fédératrice.
-          </p>
-          <p className="text-lg text-gray-400 leading-relaxed mb-12">
-            Après la sortie de son dernier single <span className="text-white">SWArM</span>, le groupe prépare actuellement la sortie de son prochain EP et poursuit son évolution avec une ambition claire : proposer un metal authentique et percutant.
-          </p>
-          <dl className="grid md:grid-cols-2 gap-10 text-sm">
-            {facts.map(({ label, value }) => (
-              <div key={label}>
-                <dt className="text-gray-500 tracking-widest mb-2">{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="space-y-8 text-lg leading-relaxed text-gray-400">
+            <p className="text-gray-300">
+              On joue du metalcore old school écorché et puissant. Les riffs sont saillants et mélodiques à la fois.
+              <br />
+              Le chant saturé est intense, habité et pleinement incarné en live par notre frontman, capable d&apos;alterner entre puissance et slam en français alarmant et percutant.
+            </p>
+            <p>Après la sortie de nos premiers singles, nous préparons activement la sortie d&apos;un EP.</p>
+            <p>
+              On s&apos;éclate à jouer en live. À la fois pour kiffer avec le public et pour nous déchaîner grâce à notre set ravageur et bien rodé.
+            </p>
+            <p>
+              Notre engagement et notre musique se complètent par des textes incisifs qui résonnent cyniquement avec la réalité.
+            </p>
+            <p className="text-white text-xl font-semibold">
+              On en veut.
+              <br />
+              On est prêts.
+            </p>
+          </div>
         </div>
       </FadeSection>
 
