@@ -32,7 +32,7 @@ const navLinks = [
   { href: "#bio", label: "BIO" },
   { href: "#sortie", label: "SORTIE" },
   { href: "#concerts", label: "CONCERTS" },
-  { href: "#scene", label: "SCÈNE" },
+  { href: "#live", label: "LIVE" },
   { href: "#galerie", label: "GALERIE" },
   { href: "#contact", label: "CONTACT" },
 ];
@@ -196,10 +196,10 @@ export default function Home() {
         <Script src="https://widgetv3.bandsintown.com/main.min.js" strategy="lazyOnload" />
       </FadeSection>
 
-      {/* SUR SCÈNE */}
-      <FadeSection id="scene" className="max-w-6xl mx-auto px-6 md:px-10 py-18">
-        <h2 className={sectionTitle}>SUR SCÈNE</h2>
-        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE sur scène" />
+      {/* LIVE */}
+      <FadeSection id="live" className="max-w-6xl mx-auto px-6 md:px-10 py-18">
+        <h2 className={sectionTitle}>LIVE</h2>
+        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE en live" />
       </FadeSection>
 
       {/* GALERIE */}
