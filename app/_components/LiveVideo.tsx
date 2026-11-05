@@ -1,10 +1,19 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useCallback, useState } from "react";
 import { useModal } from "./useModal";
 
-export function LiveVideo({ videoId, title }: { videoId: string; title: string }) {
+export function LiveVideo({
+  videoId,
+  title,
+  cover,
+}: {
+  videoId: string;
+  title: string;
+  /** Image de couverture hébergée sur le site (indépendante de YouTube) */
+  cover: StaticImageData;
+}) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   const closeButtonRef = useModal(open, close);
@@ -15,16 +24,16 @@ export function LiveVideo({ videoId, title }: { videoId: string; title: string }
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Lire la vidéo : ${title}`}
-        className="relative block w-full max-w-5xl mx-auto overflow-hidden rounded-2xl group shadow-2xl"
+        className="relative block w-full max-w-5xl mx-auto aspect-video overflow-hidden rounded-2xl group shadow-2xl"
       >
+        {/* Cadrage 16:9 + object-cover : retire les bandes noires des miniatures YouTube */}
         <Image
-          src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+          src={cover}
           alt=""
-          width={480}
-          height={360}
-          // Miniature déjà légère (480×360) : chargée directement depuis YouTube
-          unoptimized
-          className="w-full h-auto transition duration-700 group-hover:scale-105 group-hover:brightness-75"
+          fill
+          placeholder="blur"
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          className="object-cover transition duration-700 group-hover:scale-105 group-hover:brightness-75"
         />
         <span className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition duration-500" />
         <span className="absolute inset-0 flex items-center justify-center">

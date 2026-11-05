@@ -9,6 +9,7 @@ import { SocialLinks } from "./_components/SocialLinks";
 import bandPhoto from "@/public/band-photo-web.jpg";
 import heroBackground from "@/public/bg-dyside.jpg";
 import latestRelease from "@/public/latest-release.png";
+import liveCover from "@/public/live-cover.jpg";
 import logo from "@/public/logo-dyside.png";
 import photo1 from "@/public/photo1.jpg";
 import photo2 from "@/public/photo2.jpg";
@@ -37,7 +38,14 @@ const navLinks = [
   { href: "#contact", label: "CONTACT" },
 ];
 
-const sectionTitle = "text-3xl text-center tracking-[0.3em] mb-16";
+const facts = [
+  { label: "GENRE", value: "Metalcore" },
+  { label: "ORIGINE", value: "Paris, France" },
+  { label: "POUR LES FANS DE", value: "Architects, Currents, Polaris" },
+  { label: "ACTUALITÉ", value: "Nouvel EP en préparation" },
+];
+
+const sectionTitle ="text-3xl text-center tracking-[0.3em] mb-16";
 
 export default function Home() {
   return (
@@ -93,7 +101,7 @@ export default function Home() {
 
           <div className="mt-12 text-center">
             <p className="text-gray-500 tracking-[0.4em] text-sm mb-3">PROCHAINE SORTIE</p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-wide">NOUVEL EP BIENTÔT</h2>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-wide">NOUVEL EP BIENTÔT DISPONIBLE</h2>
           </div>
 
           <SocialLinks className="gap-12 mt-8" />
@@ -130,6 +138,14 @@ export default function Home() {
               On est prêts.
             </p>
           </div>
+          <dl className="grid md:grid-cols-2 gap-10 text-sm mt-12">
+            {facts.map(({ label, value }) => (
+              <div key={label}>
+                <dt className="text-gray-500 tracking-widest mb-2">{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </FadeSection>
 
@@ -193,7 +209,7 @@ export default function Home() {
       {/* LIVE */}
       <FadeSection id="live" className="max-w-6xl mx-auto px-6 md:px-10 py-18">
         <h2 className={sectionTitle}>LIVE</h2>
-        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE en live" />
+        <LiveVideo videoId="psDewmjkPwA" title="DYSIDE en live" cover={liveCover} />
       </FadeSection>
 
       {/* GALERIE */}
